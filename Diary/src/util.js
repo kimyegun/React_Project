@@ -4,19 +4,6 @@ import emotion3 from "./img/emotion3.png";
 import emotion4 from "./img/emotion4.png";
 import emotion5 from "./img/emotion5.png";
 
-export const getMonthRangeByDate = (date) => {
-  const beginTimeStamp = new Date(date.getFullYear(), date.getMonth(), 1).getTime();
-  const endTimeStamp = new Date(
-    date.getFullYear(),
-    date.getMonth() +1,
-    0,
-    23,
-    59,
-    59
-  ).getTime();
-  return {beginTimeStamp, endTimeStamp};
-}
-
 export const getEmotionImgById = (emotionId) => {
   const targetEmotionId = String(emotionId);
   switch (targetEmotionId) {
@@ -39,7 +26,7 @@ export const getFormattedDate = (targetDate) => {
   let year = targetDate.getFullYear();
   let month = targetDate.getMonth() + 1;
   let date = targetDate.getDate();
-  if (month<10) {
+  if (month < 10) {
     month = `0${month}`;
   }
   if (date < 10) {
@@ -74,4 +61,21 @@ export const emotionList = [
     name: "끔찍함",
     img: getEmotionImgById(5),
   },
-]
+];
+
+export const getMonthRangeByDate = (date) => {
+  const beginTimeStamp = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    1
+  ).getTime();
+  const endTimeStamp = new Date(
+    date.getFullYear(),
+    date.getMonth() + 1,
+    0,
+    23,
+    59,
+    59
+  ).getTime();
+  return { beginTimeStamp, endTimeStamp };
+};
