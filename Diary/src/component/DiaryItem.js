@@ -4,6 +4,7 @@ import "./DiaryItem.css";
 import { getEmotionImgById } from "../util";
 import Button from "./Button";
 
+
 const DiaryItem = ({ id, emotionId, content, date }) => {
   const navigate = useNavigate();
   const goDetail = () => {

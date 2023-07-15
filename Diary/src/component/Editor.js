@@ -1,6 +1,6 @@
 import { emotionList, getFormattedDate } from "../util";
 import "./Editor.css";
-import {useState, useEffect} from 'react';
+import {useState, useEffect ,useCallback} from 'react';
 import Button from './Button';
 import {useNavigate} from 'react-router-dom';
 import EmotionItem from './EmotionItem';
@@ -35,12 +35,12 @@ const Editor = ({ initData, onSubmit}) => {
         navigate(-1);
     };
 
-    const handleChangeEmotion = (emotionId) => {
-        setState({
+    const handleChangeEmotion = useCallback((emotionId) => {
+        setState((state) => ({
             ...state,
             emotionId,
-        });
-    };
+        }));
+    }, []);
 
     useEffect(()=>{
         if (initData) {
@@ -50,6 +50,8 @@ const Editor = ({ initData, onSubmit}) => {
             })
         }
     }, [initData]);
+
+   
     return (
         <div className="Editor">
             <div className="editor_section">
