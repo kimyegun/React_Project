@@ -1,9 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useDiary from "../hooks/useDiary";
-import { getFormattedDate } from "../component/Button";
+import { getFormattedDate } from "../util";
 import Header from "./../component/Header";
 import Button from "./../component/Button";
-import { useNavigate, useParams } from "react-router-dom";
+import Viewer from '../component/Viewer'
 
 const Diary = () => {
   const { id } = useParams();
@@ -16,6 +16,10 @@ const Diary = () => {
     navigate(-1);
   };
 
+  const goEdit = () => {
+    navigate(`/edit/${id}`);
+  }
+
   if (!data) {
     return <div>일기를 불러오고 있습니다...</div>;
   } else {
@@ -25,11 +29,14 @@ const Diary = () => {
       <div>
         <Header
           title={title}
-          leftChild={<Button text={"< 뒤로 가기"} />}
-          rightChild={<Button text={"수정하기"} />}
+          leftChild={<Button text={"< 뒤로 가기"} onClick={goBack}/>}
+          rightChild={<Button text={"수정하기"} onClick={goEdit}/>}
         />
         <div>{id}번 일기</div>
         <div>Diary 페이지</div>
+        <div>
+          <Viewer content={content} emotionId={emotionId} />
+        </div>
       </div>
     );
   }
