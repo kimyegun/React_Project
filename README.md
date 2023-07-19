@@ -4,13 +4,13 @@
 
 ### <br/>
 
-分别进入react目录和server目录下安装依赖包
+
 
 ```
 > $ npm install
 ```
 
-在server目录下启动后台服务
+
 
 ```
 > $ npm run start
