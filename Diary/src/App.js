@@ -1,16 +1,10 @@
+import React, { useReducer, useRef, useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
+import "./App.css";
 import Home from "./pages/Home";
-import Edit from "./pages/Edit";
 import New from "./pages/New";
 import Diary from "./pages/Diary";
-import React, { useReducer, useRef, useEffect, useState } from "react";
-
-export const DiaryStateContext = React.createContext();
-export const DiaryDispatchContext = React.createContext();
-
-function reducer(state, action) {
-  return state;
-}
+import Edit from "./pages/Edit";
 
 const mockData = [
   {
@@ -33,6 +27,31 @@ const mockData = [
   },
 ];
 
+function reducer(state, action) {
+  switch (action.type) {
+    case "INIT": {
+      return action.data;
+    }
+    case "CREATE": {
+      return [action.data, ...state];
+    }
+    case "UPDATE": {
+      return state.map((it) =>
+        String(it.id) === String(action.data.id) ? { ...action.data } : it
+      );
+    }
+    case "DELETE": {
+      return state.filter((it) => String(it.id) !== String(action.targetId));
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+export const DiaryStateContext = React.createContext();
+export const DiaryDispatchContext = React.createContext();
+
 function App() {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [data, dispatch] = useReducer(reducer, []);
@@ -46,27 +65,27 @@ function App() {
     setIsDataLoaded(true);
   }, []);
 
-  const onCreate = (date, content, emtionId) => {
+  const onCreate = (date, content, emotionId) => {
     dispatch({
       type: "CREATE",
       data: {
         id: idRef.current,
         date: new Date(date).getTime(),
         content,
-        emtionId,
+        emotionId,
       },
     });
     idRef.current += 1;
   };
 
-  const onUpdate = (targetId, date, content, emtionId) => {
+  const onUpdate = (targetId, date, content, emotionId) => {
     dispatch({
       type: "UPDATE",
       data: {
         id: targetId,
         date: new Date(date).getTime(),
         content,
-        emtionId,
+        emotionId,
       },
     });
   };
@@ -78,30 +97,8 @@ function App() {
     });
   };
 
-  function reducer(state, action) {
-    switch (action.type) {
-      case "INIT": {
-        return action.data;
-      }
-      case "CREATE": {
-        return [action.data, ...state];
-      }
-      default: {
-        return state;
-      }
-      case "UPDATE": {
-        return state.map((it) =>
-          String(it.id) === String(action.data.id) ? { ...action.data } : it
-        );
-      }
-      case "DELETE": {
-        return state.filter((it) => String(it.id) !== String(action.targetId));
-      }
-    }
-  }
-
   if (!isDataLoaded) {
-    return <div>데이터를 불러오는 중입니다.</div>;
+    return <div>데이터를 불러오는 중입니다</div>;
   } else {
     return (
       <DiaryStateContext.Provider value={data}>
@@ -125,5 +122,4 @@ function App() {
     );
   }
 }
-
 export default App;
