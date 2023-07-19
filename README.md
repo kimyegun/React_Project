@@ -9,13 +9,13 @@
 ### 감정일기장<br/>
 
 1. 메인페이지<br/>
-   ![CreatePlan](./image/main.png)
+   ![CreatePlan](./img/main.png)
 2. 작성페이지<br/>
-   ![CreatePlan](./image/newpage.png)
+   ![CreatePlan](./img/newpage.png)
 3. 수정페이지<br/>
-   ![CreatePlan](./image/editorpage.png)
+   ![CreatePlan](./img/editorpage.png)
 4. 상세보기<br/>
-   ![CreatePlan](./image/viwerpage.png)
+   ![CreatePlan](./img/viwerpage.png)
 
 
 ### 구현된 기능
