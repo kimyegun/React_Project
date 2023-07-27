@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.2.1",
     "axios": "^1.4.0",
     "immer": "^10.0.2",
+    "quill": "^1.3.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.1",
@@ -44,5 +45,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy" : "http://localhost:4000"
+  "proxy": "http://localhost:4000"
 }
